@@ -1,9 +1,20 @@
 <?php
 session_start();
 
+  
+if (isset($_SESSION['role']) && ($_SESSION['role'] = 'Admin' ) ) {
+  header('Location: Admin/admindashboard.php');
+  exit();
+}elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Teacher' ) ) {
+  header('Location:  dashboard.php');
+  exit();
+} elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Student' ) ) {
+  header('Location: dashboard.php');
+  exit();
+}
+
 require_once "../db/connection.php";
 require_once "../classes/user.php";
-
 ?>
 
 <!DOCTYPE html>

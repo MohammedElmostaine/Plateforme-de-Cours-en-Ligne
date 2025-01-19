@@ -215,7 +215,7 @@ class Tag {
 
     public function getTags() {
         $stmt = $this->db->query("SELECT * FROM tags");
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(); 
     }
 }
 
