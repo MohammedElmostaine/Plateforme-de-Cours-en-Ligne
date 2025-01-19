@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         // Serialize the form data.
         var formData = new FormData(form);
-        // Submit the form using AJAX.
+        //   the form using AJAX.
         var xhr = new XMLHttpRequest();
         xhr.open('POST', form.getAttribute('action'), true);
         xhr.onload = function() {

@@ -1,4 +1,5 @@
 <?php
+// session_start();
 
 
 // Database connection (db_connection.php)
@@ -19,37 +20,63 @@ class User {
         $this->password = $password;
         $this->role = $role;
     }
-
     public function register($username, $email, $password, $role) {
-        // Check if username or email already exists
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?");
-        $stmt->execute([$username, $email]);
-        if ($stmt->fetchColumn() > 0) {
-            return "Username or email already in use.";
+        // Check if username already exists
+        if(isset($username)) {
+            $stmt = $this->db->query("SELECT * FROM users WHERE username = '$username'");
+            $result = $stmt->fetch();
+    
+            if ($result) {
+                $_SESSION['emailError'] = "Email already in use.";
+                $_SESSION['usernameError'] = "Username already in use.";
+            }
         }
 
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
-        if ($stmt->execute([$username, $email, $hashedPassword, $role])) {
-            return true;
+        // Check if email already exists
+        if(isset($email)) {
+            $stmt = $this->db->query("SELECT * FROM users WHERE email = '$email'");
+            $result = $stmt->fetch();
+            if ($result) {
+                $_SESSION['emailError'] = "Email already in use.";
+                $_SESSION['usernameError'] = "Username already in use.";
+            }
+        }
+
+        if($username !== $result['username'] && $email !== $result['email']) {
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            $stmt = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+            if ($stmt->execute([$username, $email, $hashedPassword, $role])) {
+                return true;
+            } else {
+                $_SESSION['error'] = "Registration failed.";
+                return false;
+            }
         } else {
-            return "Registration failed.";
+            return false;
         }
     }
 
-    public function login($username, $password) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
+    public function login($usernameOrEmail, $password) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
+            $stmt->execute([$usernameOrEmail, $usernameOrEmail]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['email'] = $user['email'];
-            return true;
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['email'] = $user['email'];
+                return true;
+            } else {
+                $_SESSION['loginError'] = "Invalid username/email or password.";
+                return false;
+            }
+        } catch (PDOException $e) {
+            $_SESSION['loginError'] = "Database error: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
+    
 
     public function logout() {
         session_unset();
@@ -237,22 +264,3 @@ class Course {
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role'])) {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $role = $_POST['role'];
-
-        $db = (new Database())->connect();
-        $user = new User($db);
-
-        if ($user->register($username, $email, $password, $role)) {
-            echo "Registration successful!";
-        } else {
-            echo "Registration failed!";
-        }
-    } else {
-        echo "All fields are required!";
-    }
-}

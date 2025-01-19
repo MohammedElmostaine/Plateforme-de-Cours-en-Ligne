@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Student') {
+  header('Location: login.php');
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   

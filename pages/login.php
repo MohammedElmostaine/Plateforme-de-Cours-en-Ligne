@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "../db/connection.php";
 require_once "../classes/user.php";
 
@@ -193,48 +195,53 @@ require_once "../classes/user.php";
                   </p>
                 </div>
 
-                <form class="pt-25px" data-aos="fade-up">
+                <form class="pt-25px" method="POST" action="loginlogin.php">
                   <div class="mb-25px">
-                    <label
-                      class="text-contentColor dark:text-contentColor-dark mb-10px block">Username or email</label>
-                    <input
-                      type="text"
-                      placeholder="Your username or email"
-                      class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded">
+                  <label
+                    class="text-contentColor dark:text-contentColor-dark mb-10px block">Username or email</label>
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Your username or email"
+                    class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
                   </div>
 
                   <div class="mb-25px">
-                    <label
-                      class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded">
+                  <label
+                    class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
                   </div>
 
                   <div
-                    class="text-contentColor dark:text-contentColor-dark flex items-center justify-between">
-                    <div class="flex items-center">
-                      <input
-                        type="checkbox"
-                        id="remember"
-                        class="w-18px h-18px mr-2 block box-content">
-                      <label for="remember"> Remember me</label>
-                    </div>
-                    <div>
-                      <a
-                        href="#"
-                        class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Forgot your password?
-                      </a>
-                    </div>
+                  class="text-contentColor dark:text-contentColor-dark flex items-center justify-between">
+                  <div class="flex items-center">
+                    <input
+                    type="checkbox"
+                    id="remember"
+                    class="w-18px h-18px mr-2 block box-content">
+                    <label for="remember"> Remember me</label>
+                  </div>
+                  <div>
+                    <a
+                    href="#"
+                    class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Forgot your password?
+                    </a>
+                  </div>
                   </div>
                   <div class="my-25px text-center">
-                    <button
-                      type="submit"
-                      class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
-                      Log in
-                    </button>
+                  <button
+                    type="submit"
+                    class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
+                    Log in
+                  </button>
                   </div>
+                 </form>
+
+        
                   <!-- other login -->
                   <div>
                     <p
@@ -255,82 +262,64 @@ require_once "../classes/user.php";
                       <i class="icofont-google-plus"></i> Google
                     </button>
                   </div>
-                </form>
-              </div>
-              <!-- sign up form-->
-              <div
+               
+                </div>
+                <!-- sign up form-->
+                <div
                 class="hidden opacity-0 transition-opacity duration-150 ease-linear">
                 <!-- heading   -->
                 <div class="text-center">
                   <h3
-                    class="text-size-32 font-bold text-blackColor dark:text-blackColor-dark mb-2 leading-normal">
-                    Sing Up
+                  class="text-size-32 font-bold text-blackColor dark:text-blackColor-dark mb-2 leading-normal">
+                  Sign Up
                   </h3>
                   <p
-                    class="text-contentColor dark:text-contentColor-dark mb-15px">
-                    Already have an account?
-                    <a
-                      href="login.html"
-                      class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Log In</a>
+                  class="text-contentColor dark:text-contentColor-dark mb-15px">
+                  Already have an account?
+                  <a
+                  href="login.php"
+                  class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Log In</a>
                   </p>
                 </div>
-                <?php 
-                
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                  if (isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role'])) {
-                      $username = $_POST['username'];
-                      $email = $_POST['email'];
-                      $password = $_POST['password'];
-                      $role = $_POST['role'];
-
-                      $db = (new Database())->connect();
-                      $user = new User($db);
-
-                      if ($user->register($username, $email, $password, $role)) {
-                          echo "Registration successful!";
-                      } else {
-                          echo "Registration failed!";
-                      }
-                  } else {
-                      echo "All fields are required!";
-                  }
-                }
-                ?>
-                <form class="pt-25px" data-aos="fade-up" method="POST" action="">
+                 
+                <form class="pt-25px" data-aos="fade-up" method="POST" action="./registerregister.php">
                   <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-30px gap-y-25px mb-25px">
-                    <div>
-                      <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Username</label>
-                      <input type="text" name="username" placeholder="Username" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
-                    </div>
-                    <div>
-                      <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Email</label>
-                      <input type="email" name="email" placeholder="Your Email" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
-                    </div>
+                  <div>
+                  <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Username</label>
+                  <input type="text" name="username" placeholder="Username" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                  <?php echo (isset($_SESSION['usernameError']) ? $_SESSION['usernameError'] : ''); ?>
+                  </div>
+                  <div>
+                  <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Email</label>
+                  <input type="email" name="email" placeholder="Your Email" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                  <?php echo (isset($_SESSION['emailError']) ? $_SESSION['emailError'] : ''); ?>
+                </div>
                   </div>
                   <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-30px gap-y-25px mb-25px">
-                    <div>
-                      <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
-                      <input type="password" name="password" placeholder="Password" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
-                    </div>
-                    <div>
-                      <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Role</label>
-                      <select name="role" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
-                      <option value="student">Student</option>
-                      <option value="teacher">Teacher</option>
-                      </select>
-                    </div>
+                  <div>
+                  <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
+                  <input type="password" name="password" placeholder="Password" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                  </div>
+                  <div>
+                  <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Role</label>
+                  <select name="role" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                  </select>
+                  </div>
                   </div>
                   <div class="text-contentColor dark:text-contentColor-dark flex items-center">
-                    <input type="checkbox" id="accept-pp" class="w-18px h-18px mr-2 block box-content" required>
-                    <label for="accept-pp">Accept the Terms and Privacy Policy</label>
+                  <input type="checkbox" id="accept-pp" class="w-18px h-18px mr-2 block box-content" required>
+                  <label for="accept-pp">Accept the Terms and Privacy Policy</label>
                   </div>
                   <div class="mt-25px text-center">
-                    <button type="submit" class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
-                      Sign Up
-                    </button>
+                  <button type="submit" class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
+                  Sign Up
+                  </button>
                   </div>
+                    
                 </form>
-              </div>
+                </div>
             </div>
           </div>
         </div>
