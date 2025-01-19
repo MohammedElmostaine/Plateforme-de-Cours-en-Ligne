@@ -236,31 +236,124 @@ class Category {
         return $stmt->fetchAll();
     }
 }
-
 class Course {
-    private $db;
+    protected int $idCours;
+    protected string $titre;
+    protected string $description;
+    protected string $contenu;
+    protected string $image;
+    protected string $type; 
+    protected int $idCategory;
+    protected int $idTeacher;
+    protected string $date_creation;
+    protected array $Students = [];
+    
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct( string $titre, string $description, string $contenu, string $image, string $type, int $idCategory, int $idTeacher, string $date_creation) {
+        
+        $this->titre = $titre;
+        $this->description = $description;
+        $this->contenu = $contenu;
+        $this->image = $image;
+        $this->type = $type;
+        $this->idCategory = $idCategory;
+        $this->idTeacher = $idTeacher;
+        $this->date_creation = $date_creation;
     }
 
-    public function getCourse($courseId) {
-        $stmt = $this->db->prepare("SELECT * FROM courses WHERE id = ?");
-        $stmt->execute([$courseId]);
-        return $stmt->fetch();
+    public function getIdCours(): int {
+        return $this->idCours;
     }
 
-    public function getCourses($limit, $offset) {
-        $stmt = $this->db->prepare("SELECT * FROM courses LIMIT ? OFFSET ?");
-        $stmt->execute([$limit, $offset]);
-        return $stmt->fetchAll();
+    public function getTitre(): string {
+        return $this->titre;
     }
 
-    public function searchCourses($keyword) {
-        $stmt = $this->db->prepare("SELECT * FROM courses WHERE title LIKE ? OR description LIKE ?");
-        $stmt->execute(['%' . $keyword . '%', '%' . $keyword . '%']);
-        return $stmt->fetchAll();
+    public function getDescription(): string {
+        return $this->description;
+    }
+
+    public function getContenu(): string {
+        return $this->contenu;
+    }
+
+    public function getImage(): string {
+        return $this->image;
+    }
+
+    public function getType(): string {
+        return $this->type;
+    }
+
+    public function getIdCategory(): int {
+        return $this->idCategory;
+    }
+
+    public function getIdTeacher(): int {
+        return $this->idTeacher;
+    }
+
+    public function getDateCreation(): string {
+        return $this->date_creation;
+    }
+
+    public function setTitre(string $titre): void {
+        $this->titre = $titre;
+    }
+
+    public function setDescription(string $description): void {
+        $this->description = $description;
+    }
+
+    public function setContenu(string $contenu): void {
+        $this->contenu = $contenu;
+    }
+
+    public function setImage(string $image): void {
+        $this->image = $image;
+    }
+
+    public function setType(string $type): void {
+        $this->type = $type;
+    }
+
+    public function setIdCategory(int $idCategory): void {
+        $this->idCategory = $idCategory;
+    }
+
+    public function setIdTeacher(int $idTeacher): void {
+        $this->idTeacher = $idTeacher;
+    }
+
+    public function setDateCreation(string $date_creation): void {
+        $this->date_creation = $date_creation;
+    }
+
+    public static function getAllCourses(PDO $conn): array {
+        $sql = "SELECT c.*, t.*, COUNT(ci.idStudent) as student_count 
+                FROM cours c 
+                JOIN courseinscription ci ON c.idCours = ci.idCours 
+                JOIN user s ON ci.idStudent = s.idUser 
+                JOIN user t ON t.idUser = c.idTeacher 
+                GROUP BY c.idCours";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function save(PDO $conn): void {
+        $sql = "INSERT INTO cours (titre, description, contenu, image, type, idCategory, idTeacher, date_creation) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $this->titre, PDO::PARAM_STR);
+        $stmt->bindValue(2, $this->description, PDO::PARAM_STR);
+        $stmt->bindValue(3, $this->contenu, PDO::PARAM_STR);
+        $stmt->bindValue(4, $this->image, PDO::PARAM_STR);
+        $stmt->bindValue(5, $this->type, PDO::PARAM_STR);
+        $stmt->bindValue(6, $this->idCategory, PDO::PARAM_INT);
+        $stmt->bindValue(7, $this->idTeacher, PDO::PARAM_INT);
+        $stmt->bindValue(8, $this->date_creation, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
-
 
