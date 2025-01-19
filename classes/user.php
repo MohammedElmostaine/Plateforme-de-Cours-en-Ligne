@@ -1,5 +1,5 @@
 <?php
-// session_start();
+
 
 
 // Database connection (db_connection.php)
@@ -68,7 +68,7 @@ class User {
                 $_SESSION['email'] = $user['email'];
                 return true;
             } else {
-                $_SESSION['loginError'] = "Invalid username/email or password.";
+                $_SESSION['loginError'] = "Invalid username, email, or password.";
                 return false;
             }
         } catch (PDOException $e) {
@@ -76,11 +76,10 @@ class User {
             return false;
         }
     }
-    
 
-    public function logout() {
+    public static function logout() {
         session_unset();
-        session_destroy();
+        session_destroy();  
     }
 
     public function getRole() {

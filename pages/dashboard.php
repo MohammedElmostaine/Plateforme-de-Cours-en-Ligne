@@ -131,7 +131,11 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Student') {
                 >
               </div>
               <div class="text-whiteColor font-bold text-center sm:text-start">
-                <h5 class="text-2xl leading-1.24 mb-5px">Hello</h5>
+                <h5 class="text-2xl leading-1.24 mb-5px">Hello 
+                  <?php
+                  
+                   ?> 
+                </h5>
                 <ul class="flex items-center gap-15px">
                   <li class="text-sm font-normal flex items-center gap-0.5">
                     <svg
@@ -464,7 +468,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Student') {
                     class="py-10px border-b border-borderColor dark:border-borderColor-dark"
                   >
                     <a
-                      href="#"
+                      href="logout.php"
                       class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: dashboard.php");
                 exit();
             } else {
-                echo "<p class='text-red-500 text-center'>" . $_SESSION['loginError'] . "</p>";
+                header("Location: login.php");
             }
         }
         ?>

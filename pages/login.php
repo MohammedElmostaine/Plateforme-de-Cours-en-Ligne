@@ -205,52 +205,37 @@ require_once "../classes/user.php";
                     </a>
                   </p>
                 </div>
-
                 <form class="pt-25px" method="POST" action="loginlogin.php">
                   <div class="mb-25px">
-                  <label
-                    class="text-contentColor dark:text-contentColor-dark mb-10px block">Username or email</label>
-                  <input
-                    type="text"
-                    name="username"
-                    placeholder="Your username or email"
-                    class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                    <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Username or email</label>
+                    <input type="text" name="username" placeholder="Your username or email" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                    
                   </div>
 
                   <div class="mb-25px">
-                  <label
-                    class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                    <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Password</label>
+                    <input type="password" name="password" placeholder="Password" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
+                    
                   </div>
-
-                  <div
-                  class="text-contentColor dark:text-contentColor-dark flex items-center justify-between">
+                  <div class="text-red-500">
+                  <?php echo (isset($_SESSION['loginError']) ? $_SESSION['loginError'] : ''); ?> </div>
+                  <div class="text-contentColor dark:text-contentColor-dark flex items-center justify-between">
+                    
                   <div class="flex items-center">
-                    <input
-                    type="checkbox"
-                    id="remember"
-                    class="w-18px h-18px mr-2 block box-content">
-                    <label for="remember"> Remember me</label>
-                  </div>
-                  <div>
-                    <a
-                    href="#"
-                    class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Forgot your password?
-                    </a>
-                  </div>
+                      <input type="checkbox" id="remember" class="w-18px h-18px mr-2 block box-content">
+                      <label for="remember"> Remember me</label>
+                    </div>
+                    <div>
+                      <a href="#" class="hover:text-primaryColor relative after:absolute after:left-0 after:bottom-0.5 after:w-0 after:h-0.5 after:bg-primaryColor after:transition-all after:duration-300 hover:after:w-full">Forgot your password?</a>
+                    </div>
                   </div>
                   <div class="my-25px text-center">
-                  <button
-                    type="submit"
-                    class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
-                    Log in
-                  </button>
+                    
+                    <button type="submit" class="text-size-15 text-whiteColor bg-primaryColor px-25px py-10px w-full border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark">
+                      Log in
+                    </button>
                   </div>
-                 </form>
+                </form>
 
         
                   <!-- other login -->
