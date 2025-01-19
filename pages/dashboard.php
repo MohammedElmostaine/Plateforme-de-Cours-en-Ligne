@@ -133,7 +133,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Student') {
               <div class="text-whiteColor font-bold text-center sm:text-start">
                 <h5 class="text-2xl leading-1.24 mb-5px">Hello 
                   <?php
-                  
+                  echo $_SESSION['username'];
                    ?> 
                 </h5>
                 <ul class="flex items-center gap-15px">
