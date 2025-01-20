@@ -1,5 +1,6 @@
 <?php
 session_start();
+// require_once __DIR__ . "classes/user.php";
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +94,7 @@ session_start();
     </button>
   </div>
   <!--======= Header area start =======-->
-  <?php include ('layout/HEADER.php') ?>
+  <?php require ('layout/HEADER.php') ?>
 
   <!-- main body -->
   <main class="bg-transparent">

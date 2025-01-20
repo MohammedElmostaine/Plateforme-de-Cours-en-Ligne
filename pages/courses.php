@@ -1,9 +1,26 @@
 <?php
 session_start();
+require_once "/classes/user.php";
 
-if (!isset($_SESSION['user']) ) {
-    header('Location: ../index.php');
-    exit();
+// if (!isset($_SESSION['user']) ) {
+//     header('Location: ../index.php');
+//     exit();
+// }
+echo $_SESSION['user']->getUsername();
+if (isset($_SESSION['user'])) {
+    echo $_SESSION['user']->getUsername();
+    if ($_SESSION['user']) {
+        echo $_SESSION['user']->getUsername();
+    } else {
+        echo "Guest";
+    }
+} else {
+    echo "Guest";
+}
+
+if (isset($_SESSION['loginError'])) {
+    echo "<p class='error'>{$_SESSION['loginError']}</p>";
+    unset($_SESSION['loginError']);
 }
 ?>
 
