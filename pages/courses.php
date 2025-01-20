@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['role']) || ($_SESSION['role'] != 'Student' && $_SESSION['role'] != 'Teacher')) {
-    header('Location: login.php');
+if (!isset($_SESSION['user']) ) {
+    header('Location: ../index.php');
     exit();
 }
 ?>

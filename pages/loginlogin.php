@@ -2,13 +2,13 @@
 session_start();
 
 
-if (isset($_SESSION['role']) && ($_SESSION['role'] = 'Admin' ) ) {
+if (null !== $_SESSION['user']->getRole() &&  ($_SESSION['user']->getRole() == 'Admin')  ) {
   header('Location: Admin/admindashboard.php');
   exit();
-}elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Teacher' ) ) {
+}elseif ( null !== $_SESSION['user']->getRole() && ( $_SESSION['user']->getRole() == 'Teacher'  )) {
   header('Location:  teacher/teacherdash.php');
   exit();
-} elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Student' ) ) {
+} elseif ( null !== $_SESSION['user']->getRole() && ( $_SESSION['user']->getRole() == 'Student' ) ) {
   header('Location: dashboard.php');
   exit();
 }
@@ -21,12 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = $_POST['password'];
             
             $db = (new Database())->connect();
-            $user = new User($db);
-            if ($user->login($usernameOrEmail, $password)) {
-                header("Location: ../index.php");
-                exit();
+            if (User::login($db, $usernameOrEmail, $password)) {
+              header("Location: ../index.php");
+              exit();
             } else {
-                header("Location: login.php");
+              header("Location: login.php");
             }
         }
         ?>

@@ -1,9 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Student') {
+if (!isset($_SESSION['user']) ) {
   header('Location: ../index.php');
   exit();
 }
+
+echo "{$_SESSION['user']}";
 ?>
 
 <!DOCTYPE html>

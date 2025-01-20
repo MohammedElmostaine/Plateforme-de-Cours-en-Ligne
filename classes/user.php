@@ -10,20 +10,18 @@ class User {
     protected $email;
     protected $password;
     protected $role;
-    protected $db;
-
-    public function __construct($db, $id = null, $username = null, $email = null, $password = null, $role = null) {
-        $this->db = $db;
+   
+    public function __construct( $id = null, $username = null, $email = null, $password = null, $role = null) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->role = $role;
     }
-    public function register($username, $email, $password, $role) {
+    public static function register($db, $username, $email, $password, $role) {
         // Check if username already exists
         if(isset($username)) {
-            $stmt = $this->db->query("SELECT * FROM users WHERE username = '$username'");
+            $stmt = $db->query("SELECT * FROM users WHERE username = '$username'");
             $result = $stmt->fetch();
     
             if ($result) {
@@ -34,7 +32,7 @@ class User {
 
         // Check if email already exists
         if(isset($email)) {
-            $stmt = $this->db->query("SELECT * FROM users WHERE email = '$email'");
+            $stmt = $db->query("SELECT * FROM users WHERE email = '$email'");
             $result = $stmt->fetch();
             if ($result) {
                 $_SESSION['emailError'] = "Email already in use.";
@@ -44,7 +42,7 @@ class User {
 
         if($username !== $result['username'] && $email !== $result['email']) {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-            $stmt = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
             if ($stmt->execute([$username, $email, $hashedPassword, $role])) {
                 return true;
             } else {
@@ -56,17 +54,27 @@ class User {
         }
     }
 
-    public function login($usernameOrEmail, $password) {
+    public static function login($db, $usernameOrEmail, $password) {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
+            $stmt = $db->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
             $stmt->execute([$usernameOrEmail, $usernameOrEmail]);
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['role'] = $user['role'];
-                $_SESSION['email'] = $user['email'];
+                switch ($user['role']) {
+                    case 'Admin':
+                        $_SESSION['user'] = new Admin($db, $user['id'], $user['username'], $user['email'], $user['password'], $user['role']);
+                        break;
+                    case 'Teacher':
+                        $_SESSION['user'] = new Teacher($db, $user['id'], $user['username'], $user['email'], $user['password'], $user['role']);
+                        break;
+                    case 'Student':
+                        $_SESSION['user'] = new Student($db, $user['id'], $user['username'], $user['email'], $user['password'], $user['role']);
+                        break;
+                    default:
+                        $_SESSION['loginError'] = "Invalid user role.";
+                        return false;
+                }
                 return true;
             } else {
                 $_SESSION['loginError'] = "Invalid username, email, or password.";
