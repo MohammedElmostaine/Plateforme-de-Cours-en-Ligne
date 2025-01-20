@@ -2,13 +2,13 @@
 session_start();
 
   
-if (isset($_SESSION['role']) && ($_SESSION['role'] = 'Admin' ) ) {
+if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Admin' ) ) {
   header('Location: Admin/admindashboard.php');
   exit();
-}elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Teacher' ) ) {
-  header('Location:  dashboard.php');
+}elseif (isset($_SESSION['role']) && ($_SESSION['role'] == 'Teacher' ) ) {
+  header('Location:  teacher/teacherdash.php');
   exit();
-} elseif (isset($_SESSION['role']) && ($_SESSION['role'] = 'Student' ) ) {
+} elseif (isset($_SESSION['role']) && ($_SESSION['role'] == 'Student' ) ) {
   header('Location: dashboard.php');
   exit();
 }
@@ -218,7 +218,7 @@ require_once "../classes/user.php";
                     
                   </div>
                   <div class="text-red-500">
-                  <?php echo (isset($_SESSION['loginError']) ? $_SESSION['loginError'] : ''); ?> </div>
+                  <?php echo htmlspecialchars((isset($_SESSION['loginError']) ? $_SESSION['loginError'] : '')); ?> </div>
                   <div class="text-contentColor dark:text-contentColor-dark flex items-center justify-between">
                     
                   <div class="flex items-center">
