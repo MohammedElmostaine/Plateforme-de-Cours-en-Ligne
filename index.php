@@ -1,6 +1,7 @@
 <?php
 session_start();
-// require_once __DIR__ . "classes/user.php";
+require_once 'db/connection.php';
+ require_once "classes/user.php";
   ?>
 <!DOCTYPE html>
 <html lang="en">

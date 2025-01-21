@@ -1,27 +1,16 @@
 <?php
 session_start();
-require_once "/classes/user.php";
-
-// if (!isset($_SESSION['user']) ) {
-//     header('Location: ../index.php');
-//     exit();
-// }
-echo $_SESSION['user']->getUsername();
-if (isset($_SESSION['user'])) {
-    echo $_SESSION['user']->getUsername();
-    if ($_SESSION['user']) {
-        echo $_SESSION['user']->getUsername();
-    } else {
-        echo "Guest";
-    }
-} else {
-    echo "Guest";
-}
-
+require_once "../classes/user.php";
 if (isset($_SESSION['loginError'])) {
-    echo "<p class='error'>{$_SESSION['loginError']}</p>";
+    header ('Location: ../login.php');
     unset($_SESSION['loginError']);
 }
+if (isset($_SESSION['user'])){
+  $user = unserialize($_SESSION['user']);
+
+}
+
+
 ?>
 
 <!DOCTYPE html>

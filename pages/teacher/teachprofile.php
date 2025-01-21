@@ -1,34 +1,30 @@
-
 <?php
-   session_start();
-   require_once "../../db/connection.php";
-   require_once '../../classes/user.php';
-   
-   if (isset($_SESSION['user'])){
-       $user = unserialize($_SESSION['user']);
-     
-   
-   $user = unserialize($_SESSION['user']);
-   if ($user->getRole() !== 'Admin') {
-       header('Location: ../../index.php');
-       exit();
-   }
-   
-     }else{
-       header('Location: ../../index.php');
-     }
+session_start();
+require_once "../../db/connection.php";
+require_once '../../classes/user.php';
+
+if (isset($_SESSION['user'])) {
+    $user = unserialize($_SESSION['user']);
+    if ($user->getRole() !== 'Teacher') {
+        header('Location: ../../index.php');
+        exit();
+    }
+} else {
+    header('Location: ../../index.php');
+    exit();
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from html.themewin.com/edurcok-preview-tailwind/edurock/pages/dashboards/admin-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Jan 2025 03:29:04 GMT -->
+<!-- Mirrored from html.themewin.com/edurcok-preview-tailwind/edurock/pages/dashboards/admin-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Jan 2025 03:29:09 GMT -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Edurock - Education LMS Template</title>
+    <title>Admin Profile| Edurock - Education LMS Template</title>
     <link
         rel="shortcut icon"
         type="image/x-icon"
@@ -113,7 +109,6 @@
         </button>
     </div>
     <!--======= Header area start =======-->
-
 
     <!-- main body -->
     <main class="bg-transparent">
@@ -201,7 +196,7 @@
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="admindashboard.php"
+                                        href="teacherdashboard.php"
                                         class="text-primaryColor hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -222,7 +217,7 @@
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="../profile.php"
+                                        href="teacherprofile.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -244,7 +239,7 @@
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="admincourses.php"
+                                        href="teachercourses.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -261,31 +256,11 @@
                                         </svg>
                                         Courses</a>
                                 </li>
+
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="adminteachers.php"
-                                        class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-user">
-                                            <path
-                                                d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                        Teachers & Students</a>
-                                </li>
-                                <li
-                                    class="py-10px border-b border-borderColor dark:border-borderColor-dark">
-                                    <a
-                                        href="admincategory.php"
+                                        href="teachenrollments.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -300,7 +275,7 @@
                                             <polygon
                                                 points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                                         </svg>
-                                        Category & Tags</a>
+                                        Enrollments</a>
                                 </li>
 
                             </ul>
@@ -313,7 +288,7 @@
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="../settings.php"
+                                        href="settings.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -358,63 +333,111 @@
                     </div>
                     <!-- dashboard content -->
                     <div class="lg:col-start-4 lg:col-span-9">
-                        <!-- All Courses Section -->
-                        <div class="p-10px md:px-10 md:py-50px mb-30px bg-whiteColor dark:bg-whiteColor-dark shadow-accordion dark:shadow-accordion-dark rounded-5 max-h-137.5 overflow-auto">
-                            <div class="mb-6 pb-5 border-b-2 border-borderColor dark:border-borderColor-dark flex items-center justify-between gap-2 flex-wrap">
-                                <h2 class="text-2xl font-bold text-blackColor dark:text-blackColor-dark">
-                                    All Courses
+                        <!-- profile details -->
+                        <div
+                            class="p-10px md:px-10 md:py-50px mb-30px bg-whiteColor dark:bg-whiteColor-dark shadow-accordion dark:shadow-accordion-dark rounded-5">
+                            <div
+                                class="mb-6 pb-5 border-b-2 border-borderColor dark:border-borderColor-dark">
+                                <h2
+                                    class="text-2xl font-bold text-blackColor dark:text-blackColor-dark">
+                                    My Profile
                                 </h2>
-                                <a href="../../courses.html" class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8">See More...</a>
                             </div>
-                            <div class="overflow-auto">
-                                <table class="w-full text-left text-nowrap">
-                                    <thead class="text-sm md:text-base text-blackColor dark:text-blackColor-dark bg-lightGrey5 dark:bg-whiteColor-dark leading-1.8 md:leading-1.8">
-                                        <tr>
-                                            <th class="px-5px py-10px md:px-5">Course Name</th>
-                                            <th class="px-5px py-10px md:px-5">Instructor</th>
-                                            <th class="px-5px py-10px md:px-5">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-size-13 md:text-base text-contentColor dark:text-contentColor-dark font-normal">
-                                        <!-- Example Course -->
-                                        <tr class="leading-1.8 md:leading-1.8">
-                                            <th class="px-5px py-10px md:px-5 font-normal">
-                                                <p>Course 1</p>
-                                            </th>
-                                            <td class="px-5px py-10px md:px-5">
-                                                <p>Instructor 1</p>
-                                            </td>
-                                            <td class="px-5px py-10px md:px-5">
-                                                <button class="bg-transparent text-blue-500 px-4 py-2 rounded-full border-2 border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300 mr-2">Edit</button>
-                                                <button class="bg-transparent text-red-500 px-4 py-2 rounded-full border-2 border-red-500 hover:bg-red-500 hover:text-white transition-all duration-300">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <!-- Another Example Course -->
-                                        <tr class="leading-1.8 md:leading-1.8 bg-lightGrey5 dark:bg-whiteColor-dark">
-                                            <th class="px-5px py-10px md:px-5 font-normal">
-                                                <p>Course 2</p>
-                                            </th>
-                                            <td class="px-5px py-10px md:px-5">
-                                                <p>Instructor 2</p>
-                                            </td>
-                                            <td class="px-5px py-10px md:px-5">
-                                                <button class="bg-transparent text-blue-500 px-4 py-2 rounded-full border-2 border-blue-500 hover:bg-blue-500 hover:text-white transition-all duration-300 mr-2">Edit</button>
-                                                <button class="bg-transparent text-red-500 px-4 py-2 rounded-full border-2 border-red-500 hover:bg-red-500 hover:text-white transition-all duration-300">Delete</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                            <div>
+                                <ul>
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Registration Date</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">20, January 2024 9:00 PM</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">First Name</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">Michle</span>
+                                        </div>
+                                    </li>
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Last Name</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">Obema</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Username</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block"> obema007</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Email</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block"> obema@example.com</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Phone Number</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">+55 669 4456 25987</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Expert</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">Graphics Design</span>
+                                        </div>
+                                    </li>
+
+                                    <li
+                                        class="text-lg text-contentColor dark:text-contentColor-dark leading-1.67 grid grid-cols-1 md:grid-cols-12 gap-x-30px mt-15px">
+                                        <div class="md:col-start-1 md:col-span-4">
+                                            <span class="inline-block">Biography</span>
+                                        </div>
+                                        <div class="md:col-start-5 md:col-span-8">
+                                            <span class="inline-block">Lorem, ipsum dolor sit amet consectetur adipisicing
+                                                elit. Maiores veniam, delectus accusamus nesciunt
+                                                laborum repellat laboriosam, deserunt possimus itaque
+                                                iusto perferendis voluptatum quaerat cupiditate vitae.
+                                                Esse aut illum perferendis nulla, corporis impedit
+                                                quasi alias est!</span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="../../../../../cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script src="../../assets/js/swiper-bundle.min.js"></script>
     <script src="../../assets/js/isotope.pkgd.min.js"></script>
     <script src="../../assets/js/accordion.js"></script>
@@ -440,6 +463,6 @@
     <script src="../../assets/js/main.js"></script>
 </body>
 
-<!-- Mirrored from html.themewin.com/edurcok-preview-tailwind/edurock/pages/dashboards/admin-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Jan 2025 03:29:09 GMT -->
+<!-- Mirrored from html.themewin.com/edurcok-preview-tailwind/edurock/pages/dashboards/admin-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Jan 2025 03:29:09 GMT -->
 
 </html>

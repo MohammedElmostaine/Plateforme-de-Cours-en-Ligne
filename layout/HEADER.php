@@ -39,18 +39,24 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <?php
-                               
-                                // if (isset($_SESSION['user'])) {
-                                //     if ($_SESSION['user']->getRole() == 'Admin') {
-                                //         echo '<a href="../pages/Admin/admindashboard.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Admin Dashboard</a>';
-                                //     } elseif ($_SESSION['user']->getRole() == 'Teacher') {
-                                //         echo '<a href="../pages/teacher/teacherdash.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Teacher Dashboard</a>';
-                                //     } 
-                                    
-                                // }                                         echo '<a href="../pages/dashboard.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Student Dashboard</a>';
-
-                                // ?>
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                $userH = unserialize($_SESSION['user']);
+                                if (isset($userH)) {
+                                    switch ($userH->getRole()) {
+                                        case 'Admin':
+                                            echo '<a href="../pages/Admin/admindashboard.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Admin Dashboard</a>';
+                                            break;
+                                        case 'Teacher':
+                                            echo '<a href="../pages/teacher/teacherdash.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Teacher Dashboard</a>';
+                                            break;
+                                        default:
+                                            echo '<a href="../pages/dashboard.php" class="px-5 lg:px-10px 2xl:px-15px 3xl:px-5 py-10 lg:py-5 2xl:py-30px 3xl:py-10 leading-sm 2xl:leading-lg text-base lg:text-sm 2xl:text-base font-semibold block group-hover:text-primaryColor dark:text-whiteColor hover:text-primaryColor">Student Dashboard</a>';
+                                            break;
+                                    }
+                                }
+                            }
+                            ?>
                             </li>
                             <li class="nav-item">
                                 <a

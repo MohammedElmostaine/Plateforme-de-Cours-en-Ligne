@@ -4,7 +4,7 @@ class Database {
     private $host = 'localhost';
     private $dbname = 'youdemy';
     private $user = 'root';
-    private $password = 'Skimo@1999';
+    private $password = '123456';
     private $pdo = null;
 
     public function connect() {

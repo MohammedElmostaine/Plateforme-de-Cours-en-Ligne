@@ -1,11 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']) ) {
+require_once "../db/connection.php";
+require_once '../classes/user.php';
+
+$user = unserialize($_SESSION['user']);
+if (!isset($user) ) {
   header('Location: ../index.php');
   exit();
 }
 
-echo "{$_SESSION['user']}";
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +138,7 @@ echo "{$_SESSION['user']}";
               <div class="text-whiteColor font-bold text-center sm:text-start">
                 <h5 class="text-2xl leading-1.24 mb-5px">Hello 
                   <?php
-                  echo htmlspecialchars(($_SESSION['username']));
+                  echo htmlspecialchars($user->getUsername());
                    ?> 
                 </h5>
                 <ul class="flex items-center gap-15px">
@@ -232,7 +235,7 @@ echo "{$_SESSION['user']}";
                     class="py-10px border-b border-borderColor dark:border-borderColor-dark"
                   >
                     <a
-                      href="student-dashboard.html"
+                      href="dashboard.html"
                       class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
