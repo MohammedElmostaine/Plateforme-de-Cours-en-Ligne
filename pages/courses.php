@@ -1,14 +1,8 @@
 <?php
 session_start();
 require_once "../classes/user.php";
-if (isset($_SESSION['loginError'])) {
-    header ('Location: ../login.php');
-    unset($_SESSION['loginError']);
-}
-if (isset($_SESSION['user'])){
-  $user = unserialize($_SESSION['user']);
 
-}
+
 
 
 ?>
@@ -338,7 +332,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_1.png"
@@ -384,7 +378,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Foundation course to under stand about softwere
                                                 </a>
@@ -436,7 +430,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_2.png"
@@ -482,7 +476,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Nidnies course to under stand about softwere
                                                 </a>
@@ -533,7 +527,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_3.png"
@@ -581,7 +575,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Minws course to under stand about solution
                                                 </a>
@@ -632,7 +626,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_4.png"
@@ -679,7 +673,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Design course to under stand about solution
                                                 </a>
@@ -731,7 +725,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_5.png"
@@ -777,7 +771,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Data course to under stand about solution
                                                 </a>
@@ -829,7 +823,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_6.png"
@@ -876,7 +870,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Big data to under stand about solution pacage
                                                 </a>
@@ -929,7 +923,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_1.png"
@@ -975,7 +969,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Foundation course to under stand about softwere
                                                 </a>
@@ -1027,7 +1021,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_2.png"
@@ -1073,7 +1067,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Nidnies course to under stand about softwere
                                                 </a>
@@ -1124,7 +1118,7 @@ if (isset($_SESSION['user'])){
                                             <!-- card image -->
                                             <div class="relative mb-4">
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="w-full overflow-hidden rounded">
                                                     <img
                                                         src="../assets/images/grid/grid_3.png"
@@ -1172,7 +1166,7 @@ if (isset($_SESSION['user'])){
                                                     </div>
                                                 </div>
                                                 <a
-                                                    href="course-details.html"
+                                                    href="coursdetails.php"
                                                     class="text-lg font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                     Minws course to under stand about solution
                                                 </a>
@@ -1226,7 +1220,7 @@ if (isset($_SESSION['user'])){
                                                 <!-- card image -->
                                                 <div class="relative overflow-hidden w-full md:w-2/5">
                                                     <a
-                                                        href="course-details.html"
+                                                        href="coursdetails.php"
                                                         class="w-full overflow-hidden rounded">
                                                         <img
                                                             src="../assets/images/grid/grid_1.png"
@@ -1274,7 +1268,7 @@ if (isset($_SESSION['user'])){
                                                             </div>
                                                         </div>
                                                         <a
-                                                            href="course-details.html"
+                                                            href="coursdetails.php"
                                                             class="text-size-26 leading-30px font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                             Become a product Manager learn the skills &amp;
                                                             job.
@@ -1320,7 +1314,7 @@ if (isset($_SESSION['user'])){
                                                             <div>
                                                                 <a
                                                                     class="text-sm lg:text-base text-blackColor hover:text-primaryColor dark:text-blackColor-dark dark:hover:text-primaryColor"
-                                                                    href="course-details.html">Know Details
+                                                                    href="coursdetails.php">Know Details
                                                                     <i class="icofont-arrow-right"></i></a>
                                                             </div>
                                                         </div>
@@ -1337,7 +1331,7 @@ if (isset($_SESSION['user'])){
                                                 <!-- card image -->
                                                 <div class="relative overflow-hidden w-full md:w-2/5">
                                                     <a
-                                                        href="course-details.html"
+                                                        href="coursdetails.php"
                                                         class="w-full overflow-hidden rounded">
                                                         <img
                                                             src="assets/images/grid/grid_3.png"
@@ -1384,7 +1378,7 @@ if (isset($_SESSION['user'])){
                                                             </div>
                                                         </div>
                                                         <a
-                                                            href="course-details.html"
+                                                            href="coursdetails.php"
                                                             class="text-size-26 leading-30px font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                             Strategy law and with for organization
                                                             Foundation
@@ -1430,7 +1424,7 @@ if (isset($_SESSION['user'])){
                                                             <div>
                                                                 <a
                                                                     class="text-sm lg:text-base text-blackColor hover:text-primaryColor dark:text-blackColor-dark dark:hover:text-primaryColor"
-                                                                    href="course-details.html">Know Details
+                                                                    href="coursdetails.php">Know Details
                                                                     <i class="icofont-arrow-right"></i></a>
                                                             </div>
                                                         </div>
@@ -1494,7 +1488,7 @@ if (isset($_SESSION['user'])){
                                                             </div>
                                                         </div>
                                                         <a
-                                                            href="course-details.html"
+                                                            href="coursdetails.php"
                                                             class="text-size-26 leading-30px font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                             Foundation course to under stand about softwere
                                                         </a>
@@ -1539,7 +1533,7 @@ if (isset($_SESSION['user'])){
                                                             <div>
                                                                 <a
                                                                     class="text-sm lg:text-base text-blackColor hover:text-primaryColor dark:text-blackColor-dark dark:hover:text-primaryColor"
-                                                                    href="course-details.html">Know Details
+                                                                    href="coursdetails.php">Know Details
                                                                     <i class="icofont-arrow-right"></i></a>
                                                             </div>
                                                         </div>
@@ -1556,7 +1550,7 @@ if (isset($_SESSION['user'])){
                                                 <!-- card image -->
                                                 <div class="relative overflow-hidden w-full md:w-2/5">
                                                     <a
-                                                        href="course-details.html"
+                                                        href="coursdetails.php"
                                                         class="w-full overflow-hidden rounded">
                                                         <img
                                                             src="../assets/images/grid/grid_4.png"
@@ -1603,7 +1597,7 @@ if (isset($_SESSION['user'])){
                                                             </div>
                                                         </div>
                                                         <a
-                                                            href="course-details.html"
+                                                            href="coursdetails.php"
                                                             class="text-size-26 leading-30px font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                             The business Intelligence analyst with Course &
                                                             2024
@@ -1649,7 +1643,7 @@ if (isset($_SESSION['user'])){
                                                             <div>
                                                                 <a
                                                                     class="text-sm lg:text-base text-blackColor hover:text-primaryColor dark:text-blackColor-dark dark:hover:text-primaryColor"
-                                                                    href="course-details.html">Know Details
+                                                                    href="coursdetails.php">Know Details
                                                                     <i class="icofont-arrow-right"></i></a>
                                                             </div>
                                                         </div>
@@ -1713,7 +1707,7 @@ if (isset($_SESSION['user'])){
                                                             </div>
                                                         </div>
                                                         <a
-                                                            href="course-details.html"
+                                                            href="coursdetails.php"
                                                             class="text-size-26 leading-30px font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor">
                                                             Become a product Manager learn the skills & job.
                                                         </a>
@@ -1758,7 +1752,7 @@ if (isset($_SESSION['user'])){
                                                             <div>
                                                                 <a
                                                                     class="text-sm lg:text-base text-blackColor hover:text-primaryColor dark:text-blackColor-dark dark:hover:text-primaryColor"
-                                                                    href="course-details.html">Know Details
+                                                                    href="coursdetails.php">Know Details
                                                                     <i class="icofont-arrow-right"></i></a>
                                                             </div>
                                                         </div>

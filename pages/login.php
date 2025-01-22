@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-  
+
 if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Admin' ) ) {
   header('Location: Admin/admindashboard.php');
   exit();
@@ -299,8 +299,8 @@ require_once "../classes/user.php";
                   <div>
                   <label class="text-contentColor dark:text-contentColor-dark mb-10px block">Role</label>
                   <select name="role" class="w-full h-52px leading-52px pl-5 bg-transparent text-sm focus:outline-none text-contentColor dark:text-contentColor-dark border border-borderColor dark:border-borderColor-dark placeholder:text-placeholder placeholder:opacity-80 font-medium rounded" required>
-                  <option value="student">Student</option>
-                  <option value="teacher">Teacher</option>
+                  <option value="Student">Student</option>
+                  <option value="Teacher">Teacher</option>
                   </select>
                   </div>
                   </div>

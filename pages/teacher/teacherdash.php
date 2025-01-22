@@ -128,7 +128,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="text-whiteColor font-bold text-center sm:text-start">
                             <h5 class="text-xl leading-1.2 mb-5px">Hello</h5>
-                            <h2 class="text-2xl leading-1.24">Michle Obema</h2>
+                            <h2 class="text-2xl leading-1.24"><?php echo htmlspecialchars($user->getUsername())?></h2>
                         </div>
                     </div>
                     <div class="text-center">
@@ -197,7 +197,7 @@ if (isset($_SESSION['user'])) {
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="teachdash.php"
+                                        href="teacherdash.php"
                                         class="text-primaryColor hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -240,7 +240,7 @@ if (isset($_SESSION['user'])) {
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="teachcourses.php"
+                                        href="teachercourses.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"

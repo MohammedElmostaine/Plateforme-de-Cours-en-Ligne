@@ -3,11 +3,24 @@ session_start();
 require_once "../db/connection.php";
 require_once '../classes/user.php';
 
-$user = unserialize($_SESSION['user']);
-if (!isset($user) ) {
+
+if (isset($_SESSION['user']) ) {
+  
+  $user = unserialize($_SESSION['user']);
+  
+  if ($user->getRole() != 'Student') {
+    header('Location: ../index.php');
+    exit();
+  }
+
+}else{
   header('Location: ../index.php');
-  exit();
 }
+
+$user = unserialize($_SESSION['user']);
+
+$usert = serialize($user) ;
+
 
 ?>
 
@@ -550,7 +563,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -609,7 +622,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Foundation course to under stand about
@@ -705,7 +718,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -764,7 +777,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Nidnies course to under stand about softwere
@@ -858,7 +871,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -919,7 +932,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Minws course to under stand about solution
@@ -1012,7 +1025,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1071,7 +1084,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Foundation course to under stand about
@@ -1158,7 +1171,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1217,7 +1230,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Nidnies course to under stand about softwere
@@ -1303,7 +1316,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1364,7 +1377,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Minws course to under stand about solution
@@ -1441,7 +1454,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1500,7 +1513,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Foundation course to under stand about
@@ -1587,7 +1600,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1646,7 +1659,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Nidnies course to under stand about softwere
@@ -1732,7 +1745,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1793,7 +1806,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Minws course to under stand about solution
@@ -1870,7 +1883,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -1929,7 +1942,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Foundation course to under stand about
@@ -2025,7 +2038,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -2084,7 +2097,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Nidnies course to under stand about softwere
@@ -2178,7 +2191,7 @@ if (!isset($user) ) {
                               <!-- card image -->
                               <div class="relative mb-4">
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="w-full overflow-hidden rounded"
                                 >
                                   <img
@@ -2239,7 +2252,7 @@ if (!isset($user) ) {
                                   </div>
                                 </div>
                                 <a
-                                  href="../../course-details.html"
+                                  href="coursdetails.php"
                                   class="text-xl font-semibold text-blackColor mb-10px font-hind dark:text-blackColor-dark hover:text-primaryColor dark:hover:text-primaryColor"
                                 >
                                   Minws course to under stand about solution

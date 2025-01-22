@@ -127,7 +127,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <div class="text-whiteColor font-bold text-center sm:text-start">
                             <h5 class="text-xl leading-1.2 mb-5px">Hello</h5>
-                            <h2 class="text-2xl leading-1.24">Michle Obema</h2>
+                            <h2 class="text-2xl leading-1.24">Michle <?php echo htmlspecialchars($user->getUsername())?></h2>
                         </div>
                     </div>
                     <div class="text-center">
@@ -190,13 +190,13 @@ if (isset($_SESSION['user'])) {
                             <!-- greeting -->
                             <h5
                                 class="text-sm leading-1 font-semibold uppercase text-contentColor dark:text-contentColor-dark bg-lightGrey5 dark:bg-whiteColor-dark p-10px pb-7px mt-5 mb-10px">
-                                WELCOME, MICLE OBEMA
+                                WELCOME,<?php echo htmlspecialchars($user->getUsername())?>
                             </h5>
                             <ul>
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="teacherdashboard.php"
+                                        href="teacherdash.php"
                                         class="text-primaryColor hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -217,7 +217,7 @@ if (isset($_SESSION['user'])) {
                                 <li
                                     class="py-10px border-b border-borderColor dark:border-borderColor-dark">
                                     <a
-                                        href="teacherprofile.php"
+                                        href="teachprofile.php"
                                         class="text-contentColor dark:text-contentColor-dark hover:text-primaryColor dark:hover:text-primaryColor leading-1.8 flex gap-3 text-nowrap"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
