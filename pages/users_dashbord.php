@@ -62,7 +62,7 @@ if (isset($_GET['message'])) {
                         <span class="text-lg">Overview</span>
                     </a>
                     <a href="./users_dashbord.php"
-                        class="flex items-center gap-3 px-3 py-2 text-sm text-yellow-400 rounded-md bg-gray-800">
+                        class="flex items-center gap-3 px-3 py-2 text-sm text-green-400 rounded-md bg-gray-800">
                         <i class="ri-group-line text-xl"></i>
                         <span class="text-lg">Users</span>
                     </a>
@@ -107,10 +107,10 @@ if (isset($_GET['message'])) {
                         <div class="relative">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                             <input type="text" placeholder="Search for users"
-                                class="bg-gray-100 rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                                class="bg-gray-100 rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
                         </div>
                         <button
-                            class="bg-yellow-50 text-yellow-600 px-4 py-2 rounded-md text-sm font-medium">Search</button>
+                            class="bg-green-50 text-green-600 px-4 py-2 rounded-md text-sm font-medium">Search</button>
                         <i class="ri-notification-line text-xl text-gray-400"></i>
                         <i class="ri-settings-3-line text-xl text-gray-400"></i>
                     </div>
@@ -144,7 +144,7 @@ if (isset($_GET['message'])) {
                                             $statusText = $user['status'];
 
                                             if ($statusText == 'pending') {
-                                                $statusClass = 'bg-yellow-500 text-white';
+                                                $statusClass = 'bg-green-500 text-white';
                                             } elseif ($statusText == 'suspended') {
                                                 $statusClass = 'bg-red-500 text-white';
                                             } elseif ($statusText == 'activated') {
@@ -204,7 +204,7 @@ if (isset($_GET['message'])) {
                                             $statusText = $user['status'];
 
                                             if ($statusText == 'pending') {
-                                                $statusClass = 'bg-yellow-500 text-white';
+                                                $statusClass = 'bg-green-500 text-white';
                                             } elseif ($statusText == 'suspended') {
                                                 $statusClass = 'bg-red-500 text-white';
                                             } elseif ($statusText == 'activated') {

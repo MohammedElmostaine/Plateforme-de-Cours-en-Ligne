@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     <!-- main container -->
     <div class="min-h-screen flex flex-col">
-        <div class="hidden md:block w-full bg-[#f2b212] text-white">
+        <div class="hidden md:block w-full bg-[#11d000] text-white">
             <div class="container mx-auto px-4 py-2">
                 <div class="flex justify-between items-center text-sm">
                     <div class="flex items-center space-x-6">
@@ -67,27 +67,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         <img src="../assets/images/Youdemy_Logo.svg" alt="Youdemy Platform">
                     </a>
                     <nav class="hidden md:flex items-center space-x-6">
-                        <a href="../index.php" class="text-gray-900 hover:text-yellow-500 transition-colors">Home</a>
+                        <a href="../index.php" class="text-gray-900 hover:text-green-500 transition-colors">Home</a>
                         <a href="./courses.php"
-                            class="text-gray-900 hover:text-yellow-500 transition-colors">Courses</a>
+                            class="text-gray-900 hover:text-green-500 transition-colors">Courses</a>
                         <a href="./pricing.php"
-                            class="text-gray-900 hover:text-yellow-500 transition-colors">Pricing</a>
+                            class="text-gray-900 hover:text-green-500 transition-colors">Pricing</a>
                         <a href="./features.php"
-                            class="text-gray-900 hover:text-yellow-500 transition-colors">Features</a>
-                        <a href="./blog.php" class="text-gray-900 hover:text-yellow-500 transition-colors">Blog</a>
-                        <a href="./contact.php" class="text-gray-900 hover:text-yellow-500 transition-colors">Help
+                            class="text-gray-900 hover:text-green-500 transition-colors">Features</a>
+                        <a href="./blog.php" class="text-gray-900 hover:text-green-500 transition-colors">Blog</a>
+                        <a href="./contact.php" class="text-gray-900 hover:text-green-500 transition-colors">Help
                             Center</a>
                     </nav>
                     <div class="flex items-center space-x-4">
                         <button
-                            class="p-2 hidden md:block px-4 bg-yellow-400 text-white rounded-full hover:bg-white hover:text-yellow-400 hover:border hover:border-yellow-400 transition-colors">
+                            class="p-2 hidden md:block px-4 bg-green-400 text-white rounded-full hover:bg-white hover:text-green-400 hover:border hover:border-green-400 transition-colors">
                             <a href="./login.php">Login</a>
                         </button>
                         <button
-                            class="p-2 hidden md:block px-4 border border-yellow-400 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-white transition-colors">
+                            class="p-2 hidden md:block px-4 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-white transition-colors">
                             <a href="./register.php">Register</a>
                         </button>
-                        <button id="mobile-menu-btn" class="p-2 hover:text-yellow-500 transition-colors md:hidden">
+                        <button id="mobile-menu-btn" class="p-2 hover:text-green-500 transition-colors md:hidden">
                             <i class="ri-menu-4-fill text-2xl"></i>
                         </button>
                     </div>
@@ -98,29 +98,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             <div id="sidebar-menu" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
                 <div class="fixed top-0 left-0 w-64 bg-white pt-2 h-full shadow-lg">
                     <div class="flex justify-end items-center px-4">
-                        <button id="close-sidebar" class="text-gray-700 hover:text-yellow-500">
+                        <button id="close-sidebar" class="text-gray-700 hover:text-green-500">
                             <i class="ri-close-line text-2xl"></i>
                         </button>
                     </div>
                     <nav class="flex flex-col space-y-4 px-4 py-6">
                         <a href="./index.php"
-                            class="text-gray-700 hover:text-yellow-500 font-bold transition-colors">Home</a>
+                            class="text-gray-700 hover:text-green-500 font-bold transition-colors">Home</a>
                         <a href="./courses.php"
-                            class="text-gray-700 hover:text-yellow-500 transition-colors">Courses</a>
+                            class="text-gray-700 hover:text-green-500 transition-colors">Courses</a>
                         <a href="./pricing.php"
-                            class="text-gray-700 hover:text-yellow-500 transition-colors">Pricing</a>
+                            class="text-gray-700 hover:text-green-500 transition-colors">Pricing</a>
                         <a href="./features.php"
-                            class="text-gray-700 hover:text-yellow-500 transition-colors">Features</a>
-                        <a href="./blog.php" class="text-gray-700 hover:text-yellow-500 transition-colors">Blog</a>
-                        <a href="./contact.php" class="text-gray-700 hover:text-yellow-500 transition-colors">Help
+                            class="text-gray-700 hover:text-green-500 transition-colors">Features</a>
+                        <a href="./blog.php" class="text-gray-700 hover:text-green-500 transition-colors">Blog</a>
+                        <a href="./contact.php" class="text-gray-700 hover:text-green-500 transition-colors">Help
                             Center</a>
                         <div class="flex flex-col space-y-4 mt-6">
                             <button
-                                class="p-2 px-4 bg-yellow-400 text-white rounded-full hover:bg-white hover:text-yellow-400 hover:border hover:border-yellow-400 transition-colors">
+                                class="p-2 px-4 bg-green-400 text-white rounded-full hover:bg-white hover:text-green-400 hover:border hover:border-green-400 transition-colors">
                                 <a href="./login.php">Login</a>
                             </button>
                             <button
-                                class="p-2 px-4 border border-yellow-400 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-white transition-colors">
+                                class="p-2 px-4 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-white transition-colors">
                                 <a href="./register.php">Register</a>
                             </button>
                         </div>
@@ -132,21 +132,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
         <!-- Login Form -->
         <section
-            class="hero bg-bg-yellow-500/5 flex-grow flex justify-center items-center border-yellow-400 bg-opacity-20 bg-[url('../assets/images/hero-bg1.png')]  bg-cover bg-center">
+            class="hero bg-bg-green-500/5 flex-grow flex justify-center items-center border-green-400 bg-opacity-20 bg-[url('../assets/images/hero-bg1.png')]  bg-cover bg-center">
             <div class="bg-white/10 backdrop-blur-lg rounded-lg p-8 md:shadow-lg w-full max-w-md">
-                <h2 class="text-yellow-400 text-center text-3xl font-semibold mb-6">Login</h2>
+                <h2 class="text-green-400 text-center text-3xl font-semibold mb-6">Login</h2>
 
                 <form method="post">
                     <div class="relative mb-4">
                         <i class="ri-mail-line text-gray-300 absolute left-4 top-2 text-xl"></i>
                         <input type="email" placeholder="Email" name="email" required
-                            class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
+                            class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400" />
                     </div>
 
                     <div class="relative mb-4">
                         <i class="ri-lock-line text-gray-300 absolute left-4 top-2 text-xl"></i>
                         <input type="password" placeholder="Password" name="password" required
-                            class="w-full pl-12 border border-gray-300 pr-4 py-2 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
+                            class="w-full pl-12 border border-gray-300 pr-4 py-2 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400" />
                     </div>
 
                     <div class="flex justify-between text-white text-sm mb-6">
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
 
                     <button type="submit" name="submit"
-                        class="w-full py-2 bg-yellow-400 hover:bg-black text-white font-semibold rounded-lg transition duration-200 hover:bg-white hover:border hover:border-yellow-400 hover:text-yellow-400 hover:text-black">
+                        class="w-full py-2 bg-green-400 hover:bg-black text-white font-semibold rounded-lg transition duration-200 hover:bg-white hover:border hover:border-green-400 hover:text-green-400 hover:text-black">
                         Login
                     </button>
 
@@ -184,28 +184,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     <!-- Footer Section -->
 
-    <footer class="bg-yellow-10 py-16 ">
+    <footer class="bg-green-10 py-16 ">
         <div class="px-10">
             <div class="mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-team-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-team-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Community</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-link text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-link text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Referrals</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-book-2-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-book-2-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Assignments</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-medal-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-medal-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Certificates</p>
                     </div>
                 </div>
@@ -220,21 +220,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         vulputate sapien nec sagittis.</p>
                     <div class="flex gap-4">
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-facebook-fill text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-instagram-line text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-youtube-fill text-xl "></i>
                             </a>
@@ -267,9 +267,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <h3 class="text-lg font-semibold mb-4">Our Newsletter</h3>
                     <div class="flex gap-2">
                         <input type="email" placeholder="Enter Your Email"
-                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-yellow-500">
+                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-green-500">
                         <button
-                            class="px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition-colors">Submit</button>
+                            class="px-6 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-colors">Submit</button>
                     </div>
                     <p class="text-sm text-gray-600 mt-4">
                         By clicking "Subscribe", you agree to our

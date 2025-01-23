@@ -125,7 +125,7 @@ if (!$courseDetails) {
     <!-- Header container -->
     <div class="flex flex-col">
 
-        <div class="hidden md:block w-full bg-[#f2b212] text-white">
+        <div class="hidden md:block w-full bg-[#11d000] text-white">
             <div class="container mx-auto px-4 py-2">
                 <div class="flex justify-between items-center text-sm">
                     <div class="flex items-center space-x-6">
@@ -152,7 +152,7 @@ if (!$courseDetails) {
                     </a>
                     <nav class="hidden md:flex items-center space-x-6">
                         <?php foreach ($menuItems as $item): ?>
-                            <a href="<?= $item[1] ?>" class="text-gray-900 hover:text-yellow-500 transition-colors">
+                            <a href="<?= $item[1] ?>" class="text-gray-900 hover:text-green-500 transition-colors">
                                 <?= $item[0] ?>
                             </a>
                         <?php endforeach; ?>
@@ -160,11 +160,11 @@ if (!$courseDetails) {
                     <div class="flex items-center space-x-4">
                         <?php if (!$isLoggedIn): ?>
                             <button
-                                class="p-2 px-4 bg-yellow-400 text-white rounded-full hover:bg-white hover:text-yellow-400 hover:border hover:border-yellow-400 transition-colors">
+                                class="p-2 px-4 bg-green-400 text-white rounded-full hover:bg-white hover:text-green-400 hover:border hover:border-green-400 transition-colors">
                                 <a href="./login.php">Login</a>
                             </button>
                             <button
-                                class="p-2 px-4 border border-yellow-400 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-white transition-colors">
+                                class="p-2 px-4 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-white transition-colors">
                                 <a href="./register.php">Register</a>
                             </button>
                         <?php else: ?>
@@ -173,7 +173,7 @@ if (!$courseDetails) {
                                 <a href="./logout.php">Logout</a>
                             </button>
                         <?php endif; ?>
-                        <button id="mobile-menu-btn" class="p-2 hover:text-yellow-500 transition-colors md:hidden">
+                        <button id="mobile-menu-btn" class="p-2 hover:text-green-500 transition-colors md:hidden">
                             <i class="ri-menu-4-fill text-2xl"></i>
                         </button>
                     </div>
@@ -198,7 +198,7 @@ if (!$courseDetails) {
         <div class="sm:px-6 lg:px-8 py-4 w-full flex gap-4">
             <!-- video view -->
             <div class="w-[70%] border p-2 rounded-lg shadow-sm px-6 pb-8 pt-6">
-                <h3 class="font-semibold mb-2 text-xl pb-3 border-b text-yellow-400 mb-3">Course Video</h3>
+                <h3 class="font-semibold mb-2 text-xl pb-3 border-b text-green-400 mb-3">Course Video</h3>
                 <div class="relative aspect-video rounded-lg overflow-hidden ">
                     <video controls poster="../uploads/thumbnails/<?= htmlspecialchars($courseDetails['thumbnail']) ?>">
                         <source src="../uploads/videos/<?= htmlspecialchars($courseDetails['videoUrl']) ?>"
@@ -212,31 +212,31 @@ if (!$courseDetails) {
                     <div class="bg-white rounded-lg border shadow-sm p-6 ">
                         <div>
                             <div class="mb-8">
-                                <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-yellow-400">Course Info</h3>
+                                <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-green-400">Course Info</h3>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-layout-grid-line text-yellow-400"></i>
+                                        <i class="ri-layout-grid-line text-green-400"></i>
                                         <span>Category</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['category_name'] ?? 'General') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-signal-tower-line text-yellow-400"></i>
+                                        <i class="ri-signal-tower-line text-green-400"></i>
                                         <span>Difficulty</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['Difficulty'] ?? 'Unknown') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-user-line text-yellow-400"></i>
+                                        <i class="ri-user-line text-green-400"></i>
                                         <span>Students</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['student_count'] ?? '0') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-time-line text-yellow-400"></i>
+                                        <i class="ri-time-line text-green-400"></i>
                                         <span>Duration</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['Duration'] ?? 'Unknown') ?></span>
@@ -244,7 +244,7 @@ if (!$courseDetails) {
                             </div>
                             <div>
                                 <div>
-                                    <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-yellow-400">Instructor</h3>
+                                    <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-green-400">Instructor</h3>
                                     <div class="flex items-center space-x-3 ">
                                         <div class="w-12 h-12 rounded-full flex items-center justify-center">
                                             <img src="../uploads/avatars/<?php echo htmlspecialchars(isset($instructorInfo['avatarImg']) && $instructorInfo['avatarImg'] !== null ? $instructorInfo['avatarImg'] : 'simple.png'); ?>"
@@ -264,7 +264,7 @@ if (!$courseDetails) {
                         </div>
                     </div>
                     <div class="bg-white rounded-lg border shadow-sm p-6 mt-4 pb-10">
-                        <h2 class="text-lg font-semibold mb-4 text-yellow-400 border-b pb-3">Mark Your Course Progress</h2>
+                        <h2 class="text-lg font-semibold mb-4 text-green-400 border-b pb-3">Mark Your Course Progress</h2>
                         <form action="submitProgress.php" method="POST">
                             <input type="hidden" name="courseId" value="<?php echo htmlspecialchars($courseId); ?>">
                             <label for="progress" class="block text-sm font-medium text-gray-700 mb-2">Update
@@ -278,7 +278,7 @@ if (!$courseDetails) {
                                 <option value="100">100% - Completed</option>
                             </select>
                             <button type="submit"
-                                class="mt-6 bg-yellow-400 w-full text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">Submit</button>
+                                class="mt-6 bg-green-400 w-full text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">Submit</button>
                         </form>
                     </div>
 
@@ -291,7 +291,7 @@ if (!$courseDetails) {
         <div class="sm:px-6 lg:px-8 py-4 w-full flex gap-4">
             <!-- document view -->
             <div class="w-[70%] border p-2 rounded-lg shadow-sm px-6 pb-8 pt-6">
-                <h3 class="font-semibold text-xl pb-3 border-b text-yellow-400 mb-5">Course Document</h3>
+                <h3 class="font-semibold text-xl pb-3 border-b text-green-400 mb-5">Course Document</h3>
                 <div class="relative aspect-video rounded-lg overflow-hidden ">
                     <iframe src="../uploads/documents/<?= htmlspecialchars($courseDetails['document']) ?>" width="100%"
                         height="600px"></iframe>
@@ -303,31 +303,31 @@ if (!$courseDetails) {
                     <div class="bg-white rounded-lg border shadow-sm p-6 ">
                         <div>
                             <div class="mb-8">
-                                <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-yellow-400">Course Info</h3>
+                                <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-green-400">Course Info</h3>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-layout-grid-line text-yellow-400"></i>
+                                        <i class="ri-layout-grid-line text-green-400"></i>
                                         <span>Category</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['category_name'] ?? 'General') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-signal-tower-line text-yellow-400"></i>
+                                        <i class="ri-signal-tower-line text-green-400"></i>
                                         <span>Difficulty</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['Difficulty'] ?? 'Unknown') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-user-line text-yellow-400"></i>
+                                        <i class="ri-user-line text-green-400"></i>
                                         <span>Students</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['student_count'] ?? '0') ?></span>
                                 </div>
                                 <div class="flex items-center justify-between py-2 ">
                                     <div class="flex items-center gap-2">
-                                        <i class="ri-time-line text-yellow-400"></i>
+                                        <i class="ri-time-line text-green-400"></i>
                                         <span>Duration</span>
                                     </div>
                                     <span><?= htmlspecialchars($courseDetails['Duration'] ?? 'Unknown') ?></span>
@@ -335,7 +335,7 @@ if (!$courseDetails) {
                             </div>
                             <div>
                                 <div>
-                                    <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-yellow-400">Instructor</h3>
+                                    <h3 class="font-semibold mb-2 text-xl border-b pb-3 text-green-400">Instructor</h3>
                                     <div class="flex items-center space-x-3 ">
                                         <div class="w-12 h-12 rounded-full flex items-center justify-center">
                                             <img src="../uploads/avatars/<?php echo htmlspecialchars(isset($instructorInfo['avatarImg']) && $instructorInfo['avatarImg'] !== null ? $instructorInfo['avatarImg'] : 'simple.png'); ?>"
@@ -355,7 +355,7 @@ if (!$courseDetails) {
                         </div>
                     </div>
                     <div class="bg-white rounded-lg border shadow-sm p-6 mt-4 pb-10">
-                        <h2 class="text-lg font-semibold mb-4 text-yellow-400 border-b pb-3">Mark Your Course Progress</h2>
+                        <h2 class="text-lg font-semibold mb-4 text-green-400 border-b pb-3">Mark Your Course Progress</h2>
                         <form action="submitProgress.php" method="POST">
                             <input type="hidden" name="courseId" value="<?php echo htmlspecialchars($courseId); ?>">
                             <label for="progress" class="block text-sm font-medium text-gray-700 mb-2">Update
@@ -369,7 +369,7 @@ if (!$courseDetails) {
                                 <option value="100">100% - Completed</option>
                             </select>
                             <button type="submit"
-                                class="mt-6 bg-yellow-400 w-full text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">Submit</button>
+                                class="mt-6 bg-green-400 w-full text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -380,28 +380,28 @@ if (!$courseDetails) {
 
 
     <!-- Footer Section -->
-    <footer class="bg-yellow-10 py-16 ">
+    <footer class="bg-green-10 py-16 ">
         <div class="px-10">
             <div class="mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-team-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-team-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Community</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-link text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-link text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Referrals</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-book-2-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-book-2-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Assignments</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-medal-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-medal-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Certificates</p>
                     </div>
                 </div>
@@ -417,21 +417,21 @@ if (!$courseDetails) {
                         vulputate sapien nec sagittis.</p>
                     <div class="flex gap-4">
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-facebook-fill text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-instagram-line text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-youtube-fill text-xl "></i>
                             </a>
@@ -464,9 +464,9 @@ if (!$courseDetails) {
                     <h3 class="text-lg font-semibold mb-4">Our Newsletter</h3>
                     <div class="flex gap-2">
                         <input type="email" placeholder="Enter Your Email"
-                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-yellow-500">
+                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-green-500">
                         <button
-                            class="px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition-colors">Submit</button>
+                            class="px-6 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-colors">Submit</button>
                     </div>
                     <p class="text-sm text-gray-600 mt-4">
                         By clicking "Subscribe", you agree to our

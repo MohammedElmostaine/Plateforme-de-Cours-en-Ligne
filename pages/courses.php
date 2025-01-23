@@ -35,7 +35,7 @@ $totalPages = ceil($totalCourses / $limit);
     <script src="../assets/scripts/main.js" defer></script>
     <style>
         .text-gradient {
-            background: linear-gradient(to right, #f2b212, #fadf10);
+            background: linear-gradient(to right, #11d000, #fadf10);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -47,7 +47,7 @@ $totalPages = ceil($totalCourses / $limit);
     <!-- main container -->
     <div class="flex flex-col">
 
-        <div class="hidden md:block w-full bg-[#f2b212] text-white">
+        <div class="hidden md:block w-full bg-[#11d000] text-white">
             <div class="container mx-auto px-4 py-2">
                 <div class="flex justify-between items-center text-sm">
                     <div class="flex items-center space-x-6">
@@ -74,7 +74,7 @@ $totalPages = ceil($totalCourses / $limit);
                     </a>
                     <nav class="hidden md:flex items-center space-x-6">
                         <?php foreach ($menuItems as $item): ?>
-                            <a href="<?= $item[1] ?>" class="text-gray-900 hover:text-yellow-500 transition-colors">
+                            <a href="<?= $item[1] ?>" class="text-gray-900 hover:text-green-500 transition-colors">
                                 <?= $item[0] ?>
                             </a>
                         <?php endforeach; ?>
@@ -82,11 +82,11 @@ $totalPages = ceil($totalCourses / $limit);
                     <div class="flex items-center space-x-4">
                         <?php if (!$isLoggedIn): ?>
                             <button
-                                class="p-2 px-4 bg-yellow-400 text-white rounded-full hover:bg-white hover:text-yellow-400 hover:border hover:border-yellow-400 transition-colors">
+                                class="p-2 px-4 bg-green-400 text-white rounded-full hover:bg-white hover:text-green-400 hover:border hover:border-green-400 transition-colors">
                                 <a href="./login.php">Login</a>
                             </button>
                             <button
-                                class="p-2 px-4 border border-yellow-400 text-yellow-400 rounded-full hover:bg-yellow-400 hover:text-white transition-colors">
+                                class="p-2 px-4 border border-green-400 text-green-400 rounded-full hover:bg-green-400 hover:text-white transition-colors">
                                 <a href="./register.php">Register</a>
                             </button>
                         <?php else: ?>
@@ -95,7 +95,7 @@ $totalPages = ceil($totalCourses / $limit);
                                 <a href="./logout.php">Logout</a>
                             </button>
                         <?php endif; ?>
-                        <button id="mobile-menu-btn" class="p-2 hover:text-yellow-500 transition-colors md:hidden">
+                        <button id="mobile-menu-btn" class="p-2 hover:text-green-500 transition-colors md:hidden">
                             <i class="ri-menu-4-fill text-2xl"></i>
                         </button>
                     </div>
@@ -109,13 +109,13 @@ $totalPages = ceil($totalCourses / $limit);
         <div class="py-10 md:px-12 px-6">
             <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center md:mb-11">
                 Explore Our <span
-                    class="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">Courses</span>
+                    class="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-600">Courses</span>
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php if (!empty($courses)): ?>
                     <?php foreach ($courses as $course): ?>
                         <div
-                            class="bg-white border border-yellow-400 rounded-lg shadow-md p-4 hover:scale-105 transition-transform">
+                            class="bg-white border border-green-400 rounded-lg shadow-md p-4 hover:scale-105 transition-transform">
                             <img src="../uploads/thumbnails/<?= htmlspecialchars($course['thumbnail']); ?>" alt="Course Image"
                                 class="rounded-t-lg w-full">
                             <div class="py-3">
@@ -126,8 +126,8 @@ $totalPages = ceil($totalCourses / $limit);
                                 </h3>
                                 <p class="text-gray-600 text-sm mt-1"><?= htmlspecialchars($course['description']); ?></p>
                                 <div class="flex items-center justify-between mt-3">
-                                    <p class="text-yellow-400 font-bold"><?= htmlspecialchars($course['price']); ?> $</p>
-                                    <button class="font-bold underline text-yellow-400">
+                                    <p class="text-green-400 font-bold"><?= htmlspecialchars($course['price']); ?> $</p>
+                                    <button class="font-bold underline text-green-400">
                                         <a href="course-preview.php?id=<?= htmlspecialchars($course['course_id']); ?>">Preview
                                             Course</a>
                                     </button>
@@ -144,17 +144,17 @@ $totalPages = ceil($totalCourses / $limit);
                 <nav class="inline-flex items-center space-x-2">
                     <?php if ($page > 1): ?>
                         <a href="?page=<?= $page - 1 ?>"
-                            class="px-4 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500">Previous</a>
+                            class="px-4 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500">Previous</a>
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                         <a href="?page=<?= $i ?>"
-                            class="px-4 py-2 <?= $i == $page ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-800' ?> rounded-lg hover:bg-yellow-400 hover:text-white"><?= $i ?></a>
+                            class="px-4 py-2 <?= $i == $page ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800' ?> rounded-lg hover:bg-green-400 hover:text-white"><?= $i ?></a>
                     <?php endfor; ?>
 
                     <?php if ($page < $totalPages): ?>
                         <a href="?page=<?= $page + 1 ?>"
-                            class="px-4 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500">Next</a>
+                            class="px-4 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500">Next</a>
                     <?php endif; ?>
                 </nav>
             </div>
@@ -167,28 +167,28 @@ $totalPages = ceil($totalCourses / $limit);
 
     <!-- Footer Section -->
 
-    <footer class="bg-yellow-10 py-16 ">
+    <footer class="bg-green-10 py-16 ">
         <div class="px-10">
             <div class="mb-16">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-team-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-team-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Community</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-link text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-link text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Referrals</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-book-2-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-book-2-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Assignments</p>
                     </div>
                     <div
-                        class="bg-yellow-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-yellow-400 hover:scale-95 transition-transform duration-300">
-                        <i class="ri-medal-line text-2xl text-yellow-500 mb-2"></i>
+                        class="bg-green-50 p-6 rounded-lg text-center  hover:bg-transparent hover:border hover:border-green-400 hover:scale-95 transition-transform duration-300">
+                        <i class="ri-medal-line text-2xl text-green-500 mb-2"></i>
                         <p class="font-medium">Certificates</p>
                     </div>
                 </div>
@@ -203,21 +203,21 @@ $totalPages = ceil($totalCourses / $limit);
                         vulputate sapien nec sagittis.</p>
                     <div class="flex gap-4">
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-facebook-fill text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-instagram-line text-xl "></i>
                             </a>
                         </div>
 
                         <div
-                            class="h-9 w-9 bg-yellow-400 flex justify-center items-center rounded-lg hover:border hover:border-yellow-400 hover:bg-transparent hover:text-yellow-400">
+                            class="h-9 w-9 bg-green-400 flex justify-center items-center rounded-lg hover:border hover:border-green-400 hover:bg-transparent hover:text-green-400">
                             <a href="#" class="p-2 transition-colors">
                                 <i class="ri-youtube-fill text-xl "></i>
                             </a>
@@ -250,9 +250,9 @@ $totalPages = ceil($totalCourses / $limit);
                     <h3 class="text-lg font-semibold mb-4">Our Newsletter</h3>
                     <div class="flex gap-2">
                         <input type="email" placeholder="Enter Your Email"
-                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-yellow-500">
+                            class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-green-500">
                         <button
-                            class="px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition-colors">Submit</button>
+                            class="px-6 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-colors">Submit</button>
                     </div>
                     <p class="text-sm text-gray-600 mt-4">
                         By clicking "Subscribe", you agree to our

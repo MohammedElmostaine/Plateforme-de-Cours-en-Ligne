@@ -53,7 +53,7 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
 
                 <nav class="space-y-1">
                     <a href="./admin_dashbord.php"
-                        class="flex items-center gap-3 px-3 py-2 text-sm text-yellow-400 rounded-md bg-gray-800">
+                        class="flex items-center gap-3 px-3 py-2 text-sm text-green-400 rounded-md bg-gray-800">
                         <i class="ri-dashboard-line text-xl"></i>
                         <span class="text-lg">Overview</span>
                     </a>
@@ -103,10 +103,10 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                         <div class="relative">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                             <input type="text" placeholder="Search for courses"
-                                class="bg-gray-100 rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                                class="bg-gray-100 rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
                         </div>
                         <button
-                            class="bg-yellow-50 text-yellow-600 px-4 py-2 rounded-md text-sm font-medium">Enter</button>
+                            class="bg-green-50 text-green-600 px-4 py-2 rounded-md text-sm font-medium">Enter</button>
                         <i class="ri-notification-line text-xl text-gray-400"></i>
                         <i class="ri-settings-3-line text-xl text-gray-400"></i>
                     </div>
@@ -130,8 +130,8 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm border">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="bg-yellow-100 w-12 h-12 flex justify-center items-center p-3 rounded-full">
-                                <i class="ri-book-open-line text-xl text-yellow-600"></i>
+                            <div class="bg-green-100 w-12 h-12 flex justify-center items-center p-3 rounded-full">
+                                <i class="ri-book-open-line text-xl text-green-600"></i>
                             </div>
                             <span
                                 class="ml-2 text-lg text-green-600 font-bold ">+<?php echo htmlspecialchars($newCoursesRate); ?>%</span>
@@ -172,7 +172,7 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                         <div class="flex items-center justify-between mb-6">
                             <h2 class="text-lg font-semibold">Top Instructors</h2>
                             <a href="./users_dashbord.php"><button
-                                    class="text-sm text-yellow-400 hover:text-yellow-700">View All</button></a>
+                                    class="text-sm text-green-400 hover:text-green-700">View All</button></a>
                         </div>
                         <div class="space-y-4">
                             <?php foreach ($topInstructors as $instructor): ?>
@@ -199,7 +199,7 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                     <div class="bg-white border p-6 rounded-lg shadow-sm">
                         <div class="flex items-center justify-between mb-6">
                             <h2 class="text-lg font-semibold">Top Courses</h2>
-                            <button class="text-sm text-yellow-400 hover:text-yellow-700">View All</button>
+                            <button class="text-sm text-green-400 hover:text-green-700">View All</button>
                         </div>
                         <div class="space-y-4">
                             <?php foreach ($topCourses as $course): ?>
@@ -232,7 +232,7 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                         <div class="flex items-center justify-between">
                             <h2 class="text-lg font-semibold">Recent Enrollments</h2>
                             <div class="flex items-center gap-4">
-                                <a href=""><button class="text-sm text-yellow-400 font-bold underline hover:text-yellow-700">View All</button></a>
+                                <a href=""><button class="text-sm text-green-400 font-bold underline hover:text-green-700">View All</button></a>
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                                     <td class="p-4">
                                         <div class="flex items-center gap-2">
                                             <div class="w-24 h-2 bg-gray-200 rounded-full">
-                                                <div class="h-full bg-yellow-400 rounded-full"
+                                                <div class="h-full bg-green-400 rounded-full"
                                                     style="width: <?= htmlspecialchars($enrollment['progress']) ?>%"></div>
                                             </div>
                                             <span

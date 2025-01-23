@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const clonedTag = tagItem.cloneNode(true);
 
     if (container === availableTagsContainer) {
-      clonedTag.classList.remove("hover:bg-yellow-400");
-      clonedTag.classList.add("bg-yellow-400", "text-white");
+      clonedTag.classList.remove("hover:bg-green-400");
+      clonedTag.classList.add("bg-green-400", "text-white");
 
       const removeIcon = document.createElement("span");
       removeIcon.textContent = "×";
@@ -120,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedTagsContainer.appendChild(clonedTag);
       selectedTags.add(tagId);
     } else {
-      clonedTag.classList.remove("bg-yellow-400", "text-white");
-      clonedTag.classList.add("hover:bg-yellow-400");
+      clonedTag.classList.remove("bg-green-400", "text-white");
+      clonedTag.classList.add("hover:bg-green-400");
 
       const removeIcon = clonedTag.querySelector(".remove-icon");
       if (removeIcon) removeIcon.remove();
