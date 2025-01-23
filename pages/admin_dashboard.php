@@ -246,7 +246,40 @@ $recentEnrollments = $admin->getRecentEnrollments(10);
                                 <th class="text-right pr-[60px] p-4">Date</th>
                             </tr>
                         </thead>
-                        
+                        <tbody class="text-sm">
+                            <?php foreach ($recentEnrollments as $enrollment): ?>
+                                <tr class="border-b">
+                                    <td class="p-4">
+                                        <div class="flex items-center gap-3">
+                                            <img src="../uploads/avatars/<?= htmlspecialchars($enrollment['student_avatar'] ?: 'simple.png') ?>"
+                                                alt="Student" class="w-10 h-10 rounded-full object-cover">
+                                            <div>
+                                                <p class="font-medium"><?= htmlspecialchars($enrollment['student_name']) ?>
+                                                </p>
+                                                <p class="text-gray-500 text-xs">
+                                                    <?= htmlspecialchars($enrollment['student_email']) ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-4"><?= htmlspecialchars($enrollment['course_name']) ?></td>
+                                    <td class="p-4"><?= '$' . number_format($enrollment['course_price'], 2) ?></td>
+                                    <td class="p-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-24 h-2 bg-gray-200 rounded-full">
+                                                <div class="h-full bg-green-400 rounded-full"
+                                                    style="width: <?= htmlspecialchars($enrollment['progress']) ?>%"></div>
+                                            </div>
+                                            <span
+                                                class="text-sm text-gray-600"><?= htmlspecialchars($enrollment['progress']) ?>%</span>
+                                        </div>
+                                    </td>
+                                    <td class="p-4 text-right text-gray-500">
+                                        <?= date('M d, Y', strtotime($enrollment['enrollment_date'])) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
