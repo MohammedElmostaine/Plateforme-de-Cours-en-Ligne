@@ -1,26 +1,39 @@
 <?php
 require_once '../classes/user.php';
+require_once '../classes/student.php';
+require_once '../classes/instructor.php';
 User::redirectIfLoggedIn();
 
-
-$errorMessage = "";
-$database = new Database();
-$db = $database->getConnection();
+$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
+    $role = $_POST['role'];
 
-    if (empty($email) || empty($password)) {
-        $errorMessage = "Please fill in both email and password";
-    } else {
-        try {
+    $db = new Database();
 
-            $user = User::login($db, $email, $password);
-
-        } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
+    try {
+        if ($role === 'Student') {
+            $student = new Student($db);
+            $isRegistered = $student->register($username, $email, $password);
+        } elseif ($role === 'Instructor') {
+            $instructor = new Instructor($db);
+            $isRegistered = $instructor->register($username, $email, $password);
+        } else {
+            throw new Exception("Invalid role selected");
         }
+
+        if ($isRegistered === true) {
+            header('Location: ./login.php');
+            exit;
+        } else {
+            $error = $isRegistered;
+        }
+    } catch (Exception $e) {
+        $error = 'Error: ' . $e->getMessage();
     }
 }
 ?>
@@ -31,17 +44,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Youdemy Platform</title>
+    <title>Register - Youdemy Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="../assets/scripts/app.js" defer></script>
+    <script src="../assets/scripts/register.js" defer></script>
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.svg">
 </head>
 
+
 <body>
+    <style>
+        .selected {
+            border-color: #fbbf24;
+            color: #fbbf24;
+        }
+    </style>
 
     <!-- main container -->
     <div class="min-h-screen flex flex-col">
+
         <div class="hidden md:block w-full bg-[#f2b212] text-white">
             <div class="container mx-auto px-4 py-2">
                 <div class="flex justify-between items-center text-sm">
@@ -60,8 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </div>
         </div>
 
-        <header class="border-b bg-white ">
-            <div class="container mx-auto px-4 ">
+        <!-- Header -->
+        <header class="border-b bg-white">
+            <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between py-4">
                     <a href="../index.php">
                         <img src="../assets/images/Youdemy_Logo.svg" alt="Youdemy Platform">
@@ -129,58 +151,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </div>
         </header>
 
-
-        <!-- Login Form -->
+        <!-- Register Form -->
         <section
             class="hero bg-bg-yellow-500/5 flex-grow flex justify-center items-center border-yellow-400 bg-opacity-20 bg-[url('../assets/images/hero-bg1.png')]  bg-cover bg-center">
             <div class="bg-white/10 backdrop-blur-lg rounded-lg p-8 md:shadow-lg w-full max-w-md">
-                <h2 class="text-yellow-400 text-center text-3xl font-semibold mb-6">Login</h2>
+                <h2 class="text-yellow-400 text-center text-3xl font-semibold mb-6">Register</h2>
+                <form method="post" id="registerForm" enctype="multipart/form-data">
 
-                <form method="post">
+
                     <div class="relative mb-4">
-                        <i class="ri-mail-line text-gray-300 absolute left-4 top-2 text-xl"></i>
-                        <input type="email" placeholder="Email" name="email" required
+                        <i class="ri-user-line text-gray-300 absolute left-4 top-2.5 text-xl"></i>
+                        <input type="text" placeholder="Username" name="username" required
                             class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
                     </div>
 
                     <div class="relative mb-4">
-                        <i class="ri-lock-line text-gray-300 absolute left-4 top-2 text-xl"></i>
-                        <input type="password" placeholder="Password" name="password" required
-                            class="w-full pl-12 border border-gray-300 pr-4 py-2 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
+                        <i class="ri-mail-line text-gray-300 absolute left-4 top-2.5 text-xl"></i>
+                        <input type="email" placeholder="Email" name="email" required
+                            class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-border-yellow-400" />
                     </div>
 
-                    <div class="flex justify-between text-white text-sm mb-6">
-                        <label class="flex items-center text-gray-600">
-                            <input type="checkbox" class="mr-2 black" />
-                            Remember Me
-                        </label>
-                        <a href="#" class="hover:underline text-gray-600">Forgot Password?</a>
+                    <!-- Role Selection -->
+                    <div class="mb-6 w-full">
+                        <label class="block text-gray-500 font-semibold mb-2">Choose Your Role:</label>
+                        <div class="flex justify-center space-x-4 w-[100%]">
+                            <label
+                                class="role-option flex items-center justify-center w-[50%] border border-gray-300 rounded-lg cursor-pointer text-gray-300 bg-transparent hover:border-yellow-400 hover:text-yellow-400 focus:ring focus:ring-yellow-400 transition">
+                                <input type="radio" name="role" value="Student" class="hidden radio-input" />
+                                <span class="font-medium">Student</span>
+                            </label>
+                            <label
+                                class="role-option flex items-center justify-center w-[50%] py-3 border border-gray-300 rounded-lg cursor-pointer text-gray-300 bg-transparent hover:border-yellow-400 hover:text-yellow-400 focus:ring focus:ring-yellow-400 transition">
+                                <input type="radio" name="role" value="Instructor" class="hidden radio-input" />
+                                <span class="font-medium">Instructor</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="relative mb-4">
+                        <i class="ri-lock-line text-gray-300 absolute left-4 top-2.5 text-xl"></i>
+                        <input type="password" placeholder="Password" name="password" required id="password"
+                            class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
+                    </div>
+
+                    <div class="relative mb-6">
+                        <i class="ri-lock-line text-gray-300 absolute left-4 top-2.5 text-xl"></i>
+                        <input type="password" placeholder="Confirm Password" name="confirm_password"
+                            id="confirm_password" required
+                            class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg bg-white/10 text-gray-600 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400" />
                     </div>
 
                     <button type="submit" name="submit"
                         class="w-full py-2 bg-yellow-400 hover:bg-black text-white font-semibold rounded-lg transition duration-200 hover:bg-white hover:border hover:border-yellow-400 hover:text-yellow-400 hover:text-black">
-                        Login
+                        Register
                     </button>
 
                     <div class="errorsContainer">
-                        <span class="flex justify-center text-center text-red-700 mb-5 mt-5">
-                            <?php if (!empty($errorMessage)): ?>
-                                <?= htmlspecialchars($errorMessage) ?>
-                            <?php endif; ?>
-                        </span>
+                        <?php if (!empty($error)): ?>
+                            <p class="text-red-600 text-center mt-4"><?php echo htmlspecialchars($error); ?></p>
+                        <?php endif; ?>
                     </div>
+
                 </form>
 
-                <p class="text-center text-gray-600  mt-4">
-                    Don't have an account?
-                    <a href="./register.php" class="text-black hover:underline">Register</a>
+                <p class="text-center text-gray-600 mt-4">
+                    Already have an account?
+                    <a href="./login.php" class="text-black hover:underline text-black">Login</a>
                 </p>
             </div>
         </section>
     </div>
-
-
-
 
     <!-- Footer Section -->
 

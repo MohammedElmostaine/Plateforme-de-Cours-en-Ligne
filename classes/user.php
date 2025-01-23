@@ -1,211 +1,166 @@
 <?php
+require_once(__DIR__ . '/db.php');
+require_once(__DIR__ . '/student.php');
+require_once(__DIR__ . '/instructor.php');
+require_once(__DIR__ . '/admin.php');
+define('BASE_PATH', '/');
 
-class User
+abstract class User
 {
+    protected $db;
     protected $id;
     protected $username;
     protected $email;
-    protected $password;
-    protected $status;
+    protected $passwordHash;
     protected $role;
+    protected $status;
 
-    public function __construct($id = null, $username = null, $email = null, $status = null, $password = null, $role = null)
+    public function __construct($db)
     {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->status = $status;
-        $this->password = $password;
-        $this->role = $role;
+        $this->db = $db;
     }
 
-    // Getters and Setters
-    public function getId() { return $this->id; }
-    public function setId($id) { $this->id = $id; }
-    public function getUsername() { return $this->username; }
-    public function setUsername($username) { $this->username = $username; }
-    public function getEmail() { return $this->email; }
-    public function setEmail($email) { $this->email = $email; }
-    public function getStatus() { return $this->status; }
-    public function setStatus($status) { $this->status = $status; }
-    public function getRole() { return $this->role; }
-    public function setRole($role) { $this->role = $role; }
 
-    public function validatePassword($password)
-    {
-        return password_verify($password, $this->password);
+    abstract public function performAction();
+
+
+    public static function login($db, $email, $password)
+{
+    session_start();
+
+    $query = "SELECT * FROM users WHERE email = ?";
+    $stmt = $db->prepare($query);
+    
+    if ($stmt === false) {
+        throw new Exception("Error preparing the statement: " . $db->error);
     }
 
-    public static function register($username, $email, $password, $role)
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
-            $stmt->execute([$username, $email]);
-            if ($stmt->fetch()) {
-                $_SESSION['error'] = "Username or email already in use.";
-                return false;
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        if (password_verify($password, $user['passwordHash'])) {
+
+            switch ($user['role']) {
+                case 'Student':
+                    if ($user['status'] === 'pending') {
+                        header("Location: ./pending_status.php");
+                        exit;
+                    } elseif ($user['status'] === 'suspended') {
+                        header("Location: ./suspended_status.php");
+                        exit;
+                    } elseif ($user['status'] === 'activated') {
+                        $_SESSION['user_id'] = $user['id'];
+                        $_SESSION['role'] = $user['role'];
+                        header("Location: ./mycourses.php");
+                        exit; 
+                    } else {
+                        throw new Exception("Unknown status: " . $user['status']);
+                    }
+
+                case 'Instructor':
+                    if ($user['status'] === 'pending') {
+                        header("Location: ./pending_status.php");
+                        exit;
+                    } elseif ($user['status'] === 'suspended') {
+                        header("Location: ./suspended_status.php");
+                        exit;
+                    } elseif ($user['status'] === 'activated') {
+                        $_SESSION['user_id'] = $user['id'];
+                        $_SESSION['role'] = $user['role'];
+                        header("Location: ./instructor_dashboard.php");
+                        exit; 
+                    } else {
+                        throw new Exception("Unknown status: " . $user['status']);
+                    }
+
+                case 'Admin':
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
+                    header("Location: ./admin_dashboard.php");
+                    exit; 
+                default:
+                    throw new Exception("Unknown role: " . $user['role']);
             }
 
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-            $status = ($role === 'Teacher') ? 'pending' : 'active';
-            $stmt = $db->prepare("INSERT INTO users (username, email, password, role, status) VALUES (?, ?, ?, ?, ?)");
-            return $stmt->execute([$username, $email, $hashedPassword, $role, $status]);
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            $_SESSION['error'] = "Registration failed.";
-            return false;
+        } else {
+            throw new Exception("Invalid password");
         }
+    } else {
+        throw new Exception("Invalid email");
+    }
     }
 
-    public static function login($usernameOrEmail, $password)
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
-            $stmt->execute([$usernameOrEmail, $usernameOrEmail]);
-            $user = $stmt->fetch();
+    
+    
 
-            if ($user && password_verify($password, $user['password'])) {
-                switch ($user['role']) {
-                    case 'Admin':
-                        $_SESSION['user'] = serialize(new Admin($user['id'], $user['username'], $user['email'], $user['status'], $user['password'], $user['role']));
-                        break;
-                    case 'Teacher':
-                        $_SESSION['user'] = serialize(new Teacher($user['id'], $user['username'], $user['email'], $user['status'], $user['password'], $user['role']));
-                        break;
-                    case 'Student':
-                        $_SESSION['user'] = serialize(new Student($user['id'], $user['username'], $user['email'], $user['status'], $user['password'], $user['role']));
-                        break;
-                    default:
-                        $_SESSION['loginError'] = "Invalid role.";
-                        return false;
-                }
-                return true;
-            }
-            $_SESSION['loginError'] = "Invalid credentials.";
-            return false;
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            $_SESSION['loginError'] = "An error occurred during login.";
-            return false;
-        }
-    }
 
     public static function logout()
     {
+        session_start();
         session_unset();
         session_destroy();
+
+        header("Location: ../index.php");
+        exit();
     }
 
-    public function isAuthenticated()
+    public static function isLoggedIn()
     {
-        return isset($_SESSION['user']);
-    }
-}
+        session_start(); 
 
-class Student extends User
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ../pages/login.php");
+            exit();
+        }
+    }
+
+    public static function redirectIfLoggedIn()
+    {
+
+        if (isset($_SESSION['user_id'])) {
+            header("Location: ../index.php");
+            exit();
+        }
+    }
+
+    public static function getMenuItems($role)
 {
-    public function __construct($id = null, $username = null, $email = null, $status = null, $password = null)
-    {
-        parent::__construct($id, $username, $email, $status, $password, 'Student');
-    }
-
-    public function enrollCourse($courseId)
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("INSERT INTO course_enrollments (course_id, student_id) VALUES (?, ?)");
-            return $stmt->execute([$courseId, $this->id]);
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
-
-    public function getCourses()
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("SELECT c.* FROM courses c JOIN course_enrollments ce ON c.id = ce.course_id WHERE ce.student_id = ?");
-            $stmt->execute([$this->id]);
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return [];
-        }
-    }
-}
-
-class Teacher extends User
-{
-    public function __construct($id = null, $username = null, $email = null, $status = null, $password = null)
-    {
-        parent::__construct($id, $username, $email, $status, $password, 'Teacher');
-    }
-
-    public function addCourse($title, $description, $content, $categoryId)
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("INSERT INTO courses (title, description, content, category_id, teacher_id) VALUES (?, ?, ?, ?, ?)");
-            return $stmt->execute([$title, $description, $content, $categoryId, $this->id]);
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
-
-    public function getCourses()
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("SELECT * FROM courses WHERE teacher_id = ?");
-            $stmt->execute([$this->id]);
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return [];
-        }
+    $basePath = BASE_PATH;
+    switch ($role) {
+        case 'Admin':
+            return [
+                ['Dashboard', "{$basePath}pages/dashboard.php"],
+                ['Categories', "{$basePath}pages/categories.php"],
+                ['Users', "{$basePath}pages/users.php"],
+                ['Statistics', "{$basePath}pages/statistics.php"],
+                ['Tags', "{$basePath}pages/tags.php"],
+            ];
+        case 'Student':
+            return [
+                ['Home', "{$basePath}index.php"],
+                ['Courses', "{$basePath}pages/courses.php"],
+                ['My Courses', "{$basePath}pages/mycourses.php"],
+                ['Help Center', "{$basePath}pages/contact.php"],
+            ];
+        case 'Instructor':
+            return [
+                ['Dashbord', "{$basePath}pages/instructor_dashboard.php"],
+            ];
+        default:
+            return [
+                ['Home', "{$basePath}index.php"],
+                ['Courses', "{$basePath}pages/courses.php"],
+                ['Pricing', "{$basePath}pages/pricing.php"],
+                ['Features', "{$basePath}pages/features.php"],
+                ['Blog', "{$basePath}blog.php"],
+                ['Help Center', "{$basePath}pages/contact.php"],
+            ];
     }
 }
 
-class Admin extends User
-{
-    public function __construct($id = null, $username = null, $email = null, $status = null, $password = null)
-    {
-        parent::__construct($id, $username, $email, $status, $password, 'Admin');
-    }
-
-    public function validateTeacher($teacherId)
-    {
-        try {
-            $db = (new Database())->connect();
-            $stmt = $db->prepare("UPDATE users SET status = 'active' WHERE id = ? AND role = 'Teacher'");
-            return $stmt->execute([$teacherId]);
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
-
-    public function manageUser($userId, $action)
-    {
-        try {
-            $db = (new Database())->connect();
-            if ($action === 'delete') {
-                $stmt = $db->prepare("DELETE FROM users WHERE id = ?");
-                return $stmt->execute([$userId]);
-            } else {
-                $status = $action === 'activate' ? 'active' : 'suspended';
-                $stmt = $db->prepare("UPDATE users SET status = ? WHERE id = ?");
-                return $stmt->execute([$status, $userId]);
-            }
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-    }
 }
-
 ?>
