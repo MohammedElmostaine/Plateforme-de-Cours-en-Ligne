@@ -3,12 +3,7 @@ require_once '../classes/db.php';
 require_once '../classes/admin.php';
 session_start();
 
-$isLoggedIn = isset($_SESSION['user_id']);
-$userRole = $isLoggedIn ? ($_SESSION['role'] ?? 'default') : 'default';
-if ($userRole != 'Admin') {
-    header('Location: ../index.php');
-    exit;
-}
+
 
 $db = new Database();
 $admin = new Admin($db, $_SESSION['user_id']);
